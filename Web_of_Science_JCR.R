@@ -34,13 +34,12 @@ library(dplyr)
 NewTable2 <- left_join(NewTable,dataJCR,by=colnames(dataWS)[42])
 NewTable3 <- as.data.frame(NewTable2)
   
-write.table(NewTable3,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_Author.txt"),
+write.table(NewTable2,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_Author.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
 
 
 # Corresponding_Author_List
 Corresponding_Author_List <- as.data.frame(NewTable3[,3])
-colnames(Corresponding_Author_List) <- c("Corresponding_Author")
 
 Corresponding_Author_List2 <- list()
 for(i in 1:length(Corresponding_Author_List[,1])){
@@ -49,17 +48,39 @@ for(i in 1:length(Corresponding_Author_List[,1])){
 
 
 Corresponding_Author_List3 <- strsplit(as.character(Corresponding_Author_List2), ";")
-
-
 Corresponding_Author_List4 <- list()
 for(i in 1:length(Corresponding_Author_List3)){
   Corresponding_Author_List4[[i]] <- Corresponding_Author_List3[[i]][length(Corresponding_Author_List3[[i]])]
 } 
 
+Corresponding_Author_List5 <- t(as.data.frame(Corresponding_Author_List4))
+row.names(Corresponding_Author_List5) <- c(1:length(Corresponding_Author_List5))
+colnames(Corresponding_Author_List5) <- c("Corresponding_Author")
 
 
+# Corresponding_Author_Email_List
+CorrAut_Email_List <- as.data.frame(NewTable3[,13])
 
+CorrAut_Email_List2 <- list()
+for(i in 1:length(CorrAut_Email_List[,1])){
+  CorrAut_Email_List2[[i]] <- as.matrix(CorrAut_Email_List[i,1])
+}
 
+CorrAut_Email_List3 <- strsplit(as.character(CorrAut_Email_List2), ";")
+CorrAut_Email_List4 <- list()
+for(i in 1:length(CorrAut_Email_List3)){
+  CorrAut_Email_List4[[i]] <- CorrAut_Email_List3[[i]][length(CorrAut_Email_List3[[i]])]
+} 
+
+CorrAut_Email_List5 <- t(as.data.frame(CorrAut_Email_List4))
+row.names(CorrAut_Email_List5) <- c(1:length(CorrAut_Email_List5))
+colnames(CorrAut_Email_List5) <- c("Corresponding_Author_Email")
+
+NewTable3 <-cbind(CorrAut_Email_List5,NewTable3)
+NewTable3 <-cbind(Corresponding_Author_List5,NewTable3)
+
+write.table(NewTable3,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV2.txt"),
+            row.names = F,col.names = TRUE, sep = '\t')
 
 # #Separate word
 # library(tidyr)
