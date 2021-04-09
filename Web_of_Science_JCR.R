@@ -94,13 +94,17 @@ write.table(NewTable3,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate
 # dataC2[,3:4] <- new.dataC3[,1:2]
 
 
-# Screening threshold
+# Screening threshold (Impact.Factor)
 NewTable4 <- NewTable3
 NewTable4 <- NewTable4[!is.na(NewTable4$Journal.Impact.Factor),]
+NewTable4 <- NewTable4[!is.na(NewTable4$CA_Email),]
 
   # Note the factor to numeric
 NewTable4$Journal.Impact.Factor <- as.numeric(as.character(NewTable4$Journal.Impact.Factor))
 NewTable5 <- NewTable4[NewTable4$Journal.Impact.Factor >= 10,]
+
+write.table(NewTable5,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIF.txt"),
+            row.names = F,col.names = TRUE, sep = '\t')
 
 # error
 # NewTable4TTT <- NewTable4[-which(NewTable4$Journal.Impact.Factor == "NA"), ]
