@@ -55,7 +55,7 @@ for(i in 1:length(Corresponding_Author_List3)){
 
 Corresponding_Author_List5 <- t(as.data.frame(Corresponding_Author_List4))
 row.names(Corresponding_Author_List5) <- c(1:length(Corresponding_Author_List5))
-colnames(Corresponding_Author_List5) <- c("Corresponding_Author")
+colnames(Corresponding_Author_List5) <- c("CA_Name")
 
 
 # Corresponding_Author_Email_List
@@ -74,7 +74,7 @@ for(i in 1:length(CorrAut_Email_List3)){
 
 CorrAut_Email_List5 <- t(as.data.frame(CorrAut_Email_List4))
 row.names(CorrAut_Email_List5) <- c(1:length(CorrAut_Email_List5))
-colnames(CorrAut_Email_List5) <- c("Corresponding_Author_Email")
+colnames(CorrAut_Email_List5) <- c("CA_Email")
 
 NewTable3 <-cbind(CorrAut_Email_List5,NewTable3)
 NewTable3 <-cbind(Corresponding_Author_List5,NewTable3)
@@ -92,3 +92,16 @@ write.table(NewTable3,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate
 # 
 # new.dataC3 <- separate(dataC3, samples, c( "SampleType","SampleBarcode"), "_")
 # dataC2[,3:4] <- new.dataC3[,1:2]
+
+
+# Screening threshold
+NewTable4 <- NewTable3
+NewTable4 <- NewTable4[!is.na(NewTable4$Journal.Impact.Factor),]
+
+  # Note the factor to numeric
+NewTable4$Journal.Impact.Factor <- as.numeric(as.character(NewTable4$Journal.Impact.Factor))
+NewTable5 <- NewTable4[NewTable4$Journal.Impact.Factor >= 10,]
+
+# error
+# NewTable4TTT <- NewTable4[-which(NewTable4$Journal.Impact.Factor == "NA"), ]
+# NewTable4TTT <- NewTable4[!is.na(NewTable4$Journal.Impact.Factor),]
