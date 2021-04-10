@@ -11,7 +11,7 @@ PathName <- getwd() ## Set output directroy
  
 
 
-RVersion = "202104010V1"
+RVersion = "202104010V2"
 dir.create(paste0(PathName,"/",RVersion))
 
 ## Load files
@@ -97,52 +97,54 @@ write.table(NewTable3,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate
 # dataC2[,3:4] <- new.dataC3[,1:2]
 
 
-#### Screening threshold (Impact.Factor)
+#### Screening threshold 
 NewTable4 <- NewTable3
+# Turn to numeric   ## (Note!!) the factor to numeric
+NewTable4$Journal.Impact.Factor <- as.numeric(as.character(NewTable4$Journal.Impact.Factor))
+
+# Delet na
 NewTable4 <- NewTable4[!is.na(NewTable4$Journal.Impact.Factor),]
 NewTable4 <- NewTable4[!is.na(NewTable4$CA_Email),]
+#NewTable4 <- NewTable4[!is.na(NewTable4$Journal.Publication.Year),]
 
-  # Note the factor to numeric
-NewTable4$Journal.Impact.Factor <- as.numeric(as.character(NewTable4$Journal.Impact.Factor))
+#### Screening threshold (Impact.Factor)
+
+  #R1
 NewTable5_R1 <- NewTable4[NewTable4$Journal.Impact.Factor > 3 & NewTable4$Journal.Impact.Factor <= 5 ,]
-
 write.table(NewTable5_R1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR1.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
 
+  #R2
 NewTable5_R2 <- NewTable4[NewTable4$Journal.Impact.Factor > 5 & NewTable4$Journal.Impact.Factor <= 7 ,]
 write.table(NewTable5_R2,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR2.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
 
+  #R3
 NewTable5_R3 <- NewTable4[NewTable4$Journal.Impact.Factor <= 3 ,]
 write.table(NewTable5_R3,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
 
 #### Screening threshold (Years)
+# Turn to numeric   ## (Note!!) the factor to numeric
 NewTable4$Publication.Year <- as.numeric(as.character(NewTable4$Publication.Year))
+# Delet na
+NewTable4 <- NewTable4[!is.na(NewTable4$Publication.Year),]
 
   #R1
-NewTable5_R1$Publication.Year <- as.numeric(as.character(NewTable5_R1$Publication.Year))
-# Delet na
-NewTable5_R1_Y1 <- NewTable5_R1[!is.na(NewTable5_R1$Publication.Year), ]
-NewTable5_R1_Y1 <- NewTable5_R1_Y1[NewTable5_R1_Y1$Publication.Year ==2021 ,]
+NewTable5_R1_Y1 <- NewTable4[NewTable4$Journal.Impact.Factor > 3 & NewTable4$Journal.Impact.Factor <= 5 & NewTable4$Publication.Year ==2021,]
 write.table(NewTable5_R1_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR1_Y1.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
-  
+
   #R2
-NewTable5_R2$Publication.Year <- as.numeric(as.character(NewTable5_R2$Publication.Year))
-# Delet na
-NewTable5_R2_Y1 <- NewTable5_R2[!is.na(NewTable5_R2$Publication.Year), ]
-NewTable5_R2_Y1 <- NewTable5_R2_Y1[NewTable5_R2_Y1$Publication.Year ==2021 ,]
+NewTable5_R2_Y1 <- NewTable4[NewTable4$Journal.Impact.Factor > 5 & NewTable4$Journal.Impact.Factor <= 7 & NewTable4$Publication.Year ==2021,]
 write.table(NewTable5_R2_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR2_Y1.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
 
-  #R3
-NewTable5_R3$Publication.Year <- as.numeric(as.character(NewTable5_R3$Publication.Year))
-# Delet na
-NewTable5_R3_Y1 <- NewTable5_R3[!is.na(NewTable5_R3$Publication.Year), ]
-NewTable5_R3_Y1 <- NewTable5_R3_Y1[NewTable5_R3_Y1$Publication.Year ==2021 ,]
+#R3
+NewTable5_R3_Y1 <- NewTable4[NewTable4$Journal.Impact.Factor <= 3 & NewTable4$Publication.Year ==2021,]
 write.table(NewTable5_R3_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3_Y1.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
+
 
 
 # error
