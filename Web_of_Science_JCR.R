@@ -20,7 +20,10 @@ dataJCR <- read.table(paste0(PathName,"/JournalHomeGrid_2019V2.csv"),  # ¸ê®ÆÀÉ¦
                    header=T,          # ¸ê®Æ¤¤ªº²Ä¤@¦C¡A§@¬°Äæ¦ì¦WºÙ
                    sep=",")           # ±N³r¸¹µø¬°¤À¹j²Å¸¹¨ÓÅª¨ú¸ê®Æ
 library(readxl)
-dataWS <- read_excel(paste0(PathName,"/savedrecs_Test2.xls"))           # ±N³r¸¹µø¬°¤À¹j²Å¸¹¨ÓÅª¨ú¸ê®Æ
+# dataWS <- read_excel(paste0(PathName,"/20210410 Raw data_merge.xls"))           
+dataWS <- read.table(paste0(PathName,"/20210410 Raw data_merge.txt"),  # ¸ê®ÆÀÉ¦W 
+                     header=T)        
+
 dataWS2 <- dataWS
 
 colnames(dataJCR)[3] <-colnames(dataWS)[42]
@@ -101,12 +104,12 @@ NewTable4 <- NewTable4[!is.na(NewTable4$CA_Email),]
 
   # Note the factor to numeric
 NewTable4$Journal.Impact.Factor <- as.numeric(as.character(NewTable4$Journal.Impact.Factor))
-NewTable5_R1 <- NewTable4[NewTable4$Journal.Impact.Factor > 3 && NewTable4$Journal.Impact.Factor <= 5 ,]
+NewTable5_R1 <- NewTable4[NewTable4$Journal.Impact.Factor > 3 & NewTable4$Journal.Impact.Factor <= 5 ,]
 
 write.table(NewTable5_R1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR1.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
 
-NewTable5_R2 <- NewTable4[NewTable4$Journal.Impact.Factor > 5 && NewTable4$Journal.Impact.Factor <= 7 ,]
+NewTable5_R2 <- NewTable4[NewTable4$Journal.Impact.Factor > 5 & NewTable4$Journal.Impact.Factor <= 7 ,]
 write.table(NewTable5_R2,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR2.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
 
