@@ -9,7 +9,7 @@ rm(list=ls())
 # setwd("E:/cnblogs")                                    #設定工作目錄【修改】
 setwd(getwd())
 PathName = setwd(getwd())
-FolderName = c("20210410 Raw data Test") 
+FolderName = c("20210410 Raw data") 
 
 # library(xlsx)
 
@@ -53,6 +53,9 @@ for(i in 1:n){         #對於每個一級目錄(文件夾)
 unique_Email2 <- merge_1[!duplicated(merge_1$`Email Addresses`), ]
 
 
-write.table(unique_Email2,paste(PathName,'/',FolderName,'_merge.txt',sep=''),row.names = F,col.names= F)#單獨保存在每個文件夾下
-write.table(unique_Email2,paste(PathName,'/',FolderName,'_merge.csv',sep=''),row.names = FALSE,col.names= FALSE)#單獨保存在每個文件夾下
+# write.table(unique_Email2,paste0(PathName,'/',FolderName,'_merge.txt'),
+#             row.names = FALSE,col.names= TRUE, sep = '\t')#單獨保存在每個文件夾下
+
+write.table(unique_Email2,paste0(PathName,'/',FolderName,'_merge.csv'),
+            row.names = FALSE,col.names= TRUE, sep = '\t')#單獨保存在每個文件夾下
 
