@@ -11,7 +11,7 @@ PathName <- getwd() ## Set output directroy
  
 
 
-RVersion = "20210406V2"
+RVersion = "202104010V1"
 dir.create(paste0(PathName,"/",RVersion))
 
 ## Load files
@@ -101,10 +101,19 @@ NewTable4 <- NewTable4[!is.na(NewTable4$CA_Email),]
 
   # Note the factor to numeric
 NewTable4$Journal.Impact.Factor <- as.numeric(as.character(NewTable4$Journal.Impact.Factor))
-NewTable5 <- NewTable4[NewTable4$Journal.Impact.Factor >= 10,]
+NewTable5_R1 <- NewTable4[NewTable4$Journal.Impact.Factor > 3 && NewTable4$Journal.Impact.Factor <= 5 ,]
 
-write.table(NewTable5,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIF.txt"),
+write.table(NewTable5_R1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR1.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
+
+NewTable5_R2 <- NewTable4[NewTable4$Journal.Impact.Factor > 5 && NewTable4$Journal.Impact.Factor <= 7 ,]
+write.table(NewTable5_R2,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR2.txt"),
+            row.names = F,col.names = TRUE, sep = '\t')
+
+NewTable5_R3 <- NewTable4[NewTable4$Journal.Impact.Factor <= 3 ,]
+write.table(NewTable5_R3,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3.txt"),
+            row.names = F,col.names = TRUE, sep = '\t')
+
 
 # error
 # NewTable4TTT <- NewTable4[-which(NewTable4$Journal.Impact.Factor == "NA"), ]
