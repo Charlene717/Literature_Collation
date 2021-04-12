@@ -11,7 +11,7 @@ PathName <- getwd() ## Set output directroy
  
 
 
-RVersion = "202104010V2"
+RVersion = "202104012V1"
 dir.create(paste0(PathName,"/",RVersion))
 
 ## Load files
@@ -120,7 +120,7 @@ write.table(NewTable5_R2,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candid
             row.names = F,col.names = TRUE, sep = '\t')
 
   #R3
-NewTable5_R3 <- NewTable4[NewTable4$Journal.Impact.Factor <= 3 ,]
+NewTable5_R3 <- NewTable4[NewTable4$Journal.Impact.Factor > 1 & NewTable4$Journal.Impact.Factor <= 3 ,]
 write.table(NewTable5_R3,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
 
@@ -143,12 +143,17 @@ write.table(NewTable5_R2_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Can
 write.table(NewTable5_R2_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR2_Y1.csv"),row.names = FALSE,sep = ',')
 
 
+# #R3
+# NewTable5_R3_Y1 <- NewTable4[NewTable4$Journal.Impact.Factor <= 3 & NewTable4$Publication.Year ==2021,]
+# write.table(NewTable5_R3_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3_Y1.txt"),
+#             row.names = F,col.names = TRUE, sep = '\t')
+# write.table(NewTable5_R3_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3_Y1.csv"),row.names = FALSE,sep = ',')
+
 #R3
-NewTable5_R3_Y1 <- NewTable4[NewTable4$Journal.Impact.Factor <= 3 & NewTable4$Publication.Year ==2021,]
+NewTable5_R3_Y1 <- NewTable4[NewTable4$Journal.Impact.Factor > 1 & NewTable4$Journal.Impact.Factor <= 3 & NewTable4$Publication.Year ==2021,]
 write.table(NewTable5_R3_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3_Y1.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
 write.table(NewTable5_R3_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3_Y1.csv"),row.names = FALSE,sep = ',')
-
 
 
 # error
