@@ -131,16 +131,16 @@ NewTable4$Publication.Year <- as.numeric(as.character(NewTable4$Publication.Year
 NewTable4 <- NewTable4[!is.na(NewTable4$Publication.Year),]
 
   #R1
-NewTable5_R1_Y1 <- NewTable4[NewTable4$Journal.Impact.Factor > 3 & NewTable4$Journal.Impact.Factor <= 5 & NewTable4$Publication.Year ==2021,]
-write.table(NewTable5_R1_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR1_Y1.txt"),
+NewTable5_R1_Y1 <- NewTable4[NewTable4$Journal.Impact.Factor > 3 & NewTable4$Journal.Impact.Factor <= 5 & NewTable4$Publication.Year ==2019,]
+write.table(NewTable5_R1_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR1_Y1_2019.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
-write.table(NewTable5_R1_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR1_Y1.csv"),row.names = FALSE,sep = ',')
+write.table(NewTable5_R1_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR1_Y1_2019.csv"),row.names = FALSE,sep = ',')
 
   #R2
-NewTable5_R2_Y1 <- NewTable4[NewTable4$Journal.Impact.Factor > 5 & NewTable4$Journal.Impact.Factor <= 7 & NewTable4$Publication.Year ==2021,]
-write.table(NewTable5_R2_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR2_Y1.txt"),
+NewTable5_R2_Y1 <- NewTable4[NewTable4$Journal.Impact.Factor > 5 & NewTable4$Journal.Impact.Factor <= 7 & NewTable4$Publication.Year ==2019,]
+write.table(NewTable5_R2_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR2_Y1_2019.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
-write.table(NewTable5_R2_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR2_Y1.csv"),row.names = FALSE,sep = ',')
+write.table(NewTable5_R2_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR2_Y1_2019.csv"),row.names = FALSE,sep = ',')
 
 
 # #R3
@@ -150,10 +150,10 @@ write.table(NewTable5_R2_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Can
 # write.table(NewTable5_R3_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3_Y1.csv"),row.names = FALSE,sep = ',')
 
 #R3
-NewTable5_R3_Y1 <- NewTable4[NewTable4$Journal.Impact.Factor > 1 & NewTable4$Journal.Impact.Factor <= 3 & NewTable4$Publication.Year ==2021,]
-write.table(NewTable5_R3_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3_Y1.txt"),
+NewTable5_R3_Y1 <- NewTable4[NewTable4$Journal.Impact.Factor > 1 & NewTable4$Journal.Impact.Factor <= 3 & NewTable4$Publication.Year ==2019,]
+write.table(NewTable5_R3_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3_Y1_2019.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
-write.table(NewTable5_R3_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3_Y1.csv"),row.names = FALSE,sep = ',')
+write.table(NewTable5_R3_Y1,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV3_TIFR3_Y1_2019.csv"),row.names = FALSE,sep = ',')
 
 
 # error
