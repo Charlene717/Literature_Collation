@@ -53,8 +53,11 @@ unique_Email2 <- merge_1[!duplicated(merge_1$`EMail`), ]
 
 ######################################################################
 
+######################################################################
 Author_list_New2 <- Author_list_New[,1:6]
-colnames(Author_list_New2) <- colnames(unique_Email2)
+# colnames(Author_list_New2) <- colnames(unique_Email2)
+colnames(Author_list_New2) <- c("Name",	"Last Name",	"EMail",	"Reference",	"Affiliation"	,"Country")
+
 library(dplyr)
 Author_list_New3 <- dplyr::anti_join(Author_list_New2,unique_Email2,by="EMail")
 write.table(Author_list_New3,file=paste0(PathName,"/",FloderName_New,"/",FloderName_New_Sub,"/",
