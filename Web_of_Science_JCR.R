@@ -11,7 +11,7 @@ PathName <- getwd() ## Set output directroy
  
 
 
-RVersion = "202104012V1"
+RVersion = "202104020V1"
 dir.create(paste0(PathName,"/",RVersion))
 
 ## Load files
@@ -21,7 +21,7 @@ dataJCR <- read.table(paste0(PathName,"/JournalHomeGrid_2019V2.csv"),  # ¸ê®ÆÀÉ¦
                    sep=",")           # ±N³r¸¹µø¬°¤À¹j²Å¸¹¨ÓÅª¨ú¸ê®Æ
 library(readxl)
 # dataWS <- read_excel(paste0(PathName,"/20210410 Raw data_merge.xls"))           
-dataWS <- read.table(paste0(PathName,"/20210410 Raw data_merge.txt"),  # ¸ê®ÆÀÉ¦W 
+dataWS <- read.table(paste0(PathName,"/20210420 Raw data_merge.txt"),  # ¸ê®ÆÀÉ¦W 
                      header=T)        
 
 dataWS2 <- dataWS
@@ -78,11 +78,14 @@ for(i in 1:length(CorrAut_Email_List3)){
 CorrAut_Email_List5 <- t(as.data.frame(CorrAut_Email_List4))
 row.names(CorrAut_Email_List5) <- c(1:length(CorrAut_Email_List5))
 colnames(CorrAut_Email_List5) <- c("CA_Email")
+#datainte_cyto2 <- datainte_cyto2[!grepl("mmu-miR-", datainte_cyto2[,2], ignore.case=TRUE),]
+CorrAut_Email_List6  <- gsub(" ", "", CorrAut_Email_List5)
 
-NewTable3 <-cbind(CorrAut_Email_List5,NewTable3)
+NewTable3 <-cbind(CorrAut_Email_List6,NewTable3)
 NewTable3 <-cbind(Corresponding_Author_List5,NewTable3)
+NewTable3_2 = unique(NewTable3, by = "CA_Email")
 
-write.table(NewTable3,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV2.txt"),
+write.table(NewTable3_2,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate_AuthorV2.txt"),
             row.names = F,col.names = TRUE, sep = '\t')
 
 # #Separate word
@@ -98,7 +101,7 @@ write.table(NewTable3,file=paste0(PathName,"/",RVersion,"/",RVersion,"_Candidate
 
 
 #### Screening threshold 
-NewTable4 <- NewTable3
+NewTable4 <- NewTable3_2
 # Turn to numeric   ## (Note!!) the factor to numeric
 NewTable4$Journal.Impact.Factor <- as.numeric(as.character(NewTable4$Journal.Impact.Factor))
 
